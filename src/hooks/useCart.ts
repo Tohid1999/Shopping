@@ -31,5 +31,9 @@ export const useCart = () => {
     dispatch({ type: CartActionType.RemoveItem, payload: { id } });
   };
 
-  return { state, cartCount, getQuantity, addToCart, increment, decrement, remove };
+  const clearCart = () => {
+    dispatch({ type: CartActionType.ClearCart });
+  };
+
+  return { state, cartCount, getQuantity, addToCart, increment, decrement, remove, clearCart };
 };

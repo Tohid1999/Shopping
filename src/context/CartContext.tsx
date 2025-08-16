@@ -1,23 +1,24 @@
-
-import React, { createContext, useReducer, ReactNode, useMemo } from 'react';
-import { CartItem } from '../types';
+import React, { createContext, useReducer, ReactNode, useMemo } from "react";
+import { CartItem } from "../types";
 
 export interface CartState {
   items: CartItem[];
 }
 
 export enum CartActionType {
-  AddItem = 'ADD_ITEM',
-  RemoveItem = 'REMOVE_ITEM',
-  IncrementQuantity = 'INCREMENT_QUANTITY',
-  DecrementQuantity = 'DECREMENT_QUANTITY',
+  AddItem = "ADD_ITEM",
+  RemoveItem = "REMOVE_ITEM",
+  IncrementQuantity = "INCREMENT_QUANTITY",
+  DecrementQuantity = "DECREMENT_QUANTITY",
+  ClearCart = "CLEAR_CART",
 }
 
-type CartAction = 
+type CartAction =
   | { type: CartActionType.AddItem; payload: { id: number } }
   | { type: CartActionType.RemoveItem; payload: { id: number } }
   | { type: CartActionType.IncrementQuantity; payload: { id: number } }
-  | { type: CartActionType.DecrementQuantity; payload: { id: number } };
+  | { type: CartActionType.DecrementQuantity; payload: { id: number } }
+  | { type: CartActionType.ClearCart };
 
 interface CartContextProps {
   state: CartState;
@@ -29,7 +30,9 @@ const initialState: CartState = {
   items: [],
 };
 
-export const CartContext = createContext<CartContextProps | undefined>(undefined);
+export const CartContext = createContext<CartContextProps | undefined>(
+  undefined
+);
 
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
@@ -68,9 +71,17 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
     case CartActionType.DecrementQuantity: {
       return {
         ...state,
-        items: state.items.map((x) =>
-          x.id === action.payload.id ? { ...x, quantity: x.quantity - 1 } : x
-        ).filter(item => item.quantity > 0),
+        items: state.items
+          .map((x) =>
+            x.id === action.payload.id ? { ...x, quantity: x.quantity - 1 } : x
+          )
+          .filter((item) => item.quantity > 0),
+      };
+    }
+    case CartActionType.ClearCart: {
+      return {
+        ...state,
+        items: [],
       };
     }
     default:

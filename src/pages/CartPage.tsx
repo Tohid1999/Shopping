@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import CartItemRow from '../components/CartItemRow';
 import { useProducts } from '../hooks/useProducts';
@@ -44,6 +45,12 @@ const CartPage: React.FC = () => {
             })}
             <div className="text-right mt-4">
               <h3 className="text-xl font-bold">Total: ${totalCost.toFixed(2)}</h3>
+              <Link
+                to="/checkout"
+                className="mt-4 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Proceed to Checkout
+              </Link>
             </div>
           </div>
         )}
