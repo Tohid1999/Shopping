@@ -1,20 +1,26 @@
-import ProductList from './components/ProductList';
-import ShoppingCart from './components/ShoppingCart';
+import { Link, Outlet } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
+import { useCart } from './hooks/useCart';
 
 function App() {
+  const { cartCount } = useCart();
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <header className="bg-white shadow">
-        <h1 className="text-3xl font-bold text-center py-4">Shopping Cart</h1>
+        <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold">
+            My Shop
+          </Link>
+          <Link to="/cart" className="flex items-center">
+            <FaShoppingCart className="text-2xl" />
+            <span className="ml-2 bg-blue-500 text-white rounded-full px-2 py-1 text-xs">
+              {cartCount}
+            </span>
+          </Link>
+        </nav>
       </header>
-      <main className="container mx-auto mt-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
-          <ProductList />
-        </div>
-        <div>
-          <ShoppingCart />
-        </div>
-      </main>
+      <Outlet />
     </div>
   );
 }
