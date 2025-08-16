@@ -1,10 +1,10 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCart } from '../hooks/useCart';
-import CartItemRow from '../components/CartItemRow';
-import { useProducts } from '../hooks/useProducts';
-import { Product } from '../types';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useCart } from "../hooks/useCart";
+import CartItemRow from "../components/CartItemRow";
+import { useProducts } from "../hooks/useProducts";
+import { Product } from "../types";
+import { FaCreditCard } from "react-icons/fa";
 
 const CartPage: React.FC = () => {
   const { state } = useCart();
@@ -31,8 +31,8 @@ const CartPage: React.FC = () => {
   }
 
   return (
-    <main className="container mx-auto mt-8">
-      <div className="border p-4 rounded-lg shadow">
+    <main className="container mx-auto mt-8 animate-fade-in-up">
+      <div className="border p-6 rounded-lg shadow">
         <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
         {state.items.length === 0 ? (
           <p>Your cart is empty.</p>
@@ -41,15 +41,19 @@ const CartPage: React.FC = () => {
             {state.items.map((item) => {
               const product = productMap.get(item.id);
               if (!product) return null;
-              return <CartItemRow key={item.id} item={item} product={product} />;
+              return (
+                <CartItemRow key={item.id} item={item} product={product} />
+              );
             })}
             <div className="text-right mt-4">
-              <h3 className="text-xl font-bold">Total: ${totalCost.toFixed(2)}</h3>
+              <h3 className="text-xl font-bold">
+                Total: ${totalCost.toFixed(2)}
+              </h3>
               <Link
                 to="/checkout"
-                className="mt-4 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                className="mt-4 inline-flex items-center justify-center bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md"
               >
-                Proceed to Checkout
+                <FaCreditCard className="mr-2" /> Proceed to Checkout
               </Link>
             </div>
           </div>

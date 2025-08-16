@@ -1,9 +1,9 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../hooks/useCart';
 import { useProducts } from '../hooks/useProducts';
 import { Product } from '../types';
+import { FaCheckCircle } from 'react-icons/fa';
 
 const CheckoutPage: React.FC = () => {
   const { state, clearCart } = useCart();
@@ -29,8 +29,8 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
-    <main className="container mx-auto mt-8">
-      <div className="border p-4 rounded-lg shadow">
+    <main className="container mx-auto mt-8 animate-fade-in-up">
+      <div className="border p-6 rounded-lg shadow">
         <h2 className="text-2xl font-bold mb-4">Checkout</h2>
         <div className="mb-4">
           <h3 className="text-xl font-semibold mb-2">Order Summary</h3>
@@ -52,9 +52,9 @@ const CheckoutPage: React.FC = () => {
         </div>
         <button 
           onClick={handleConfirmPurchase}
-          className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md flex items-center justify-center"
         >
-          Confirm Purchase
+          <FaCheckCircle className="mr-2" /> Confirm Purchase
         </button>
       </div>
     </main>
