@@ -75,7 +75,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
           .map((x) =>
             x.id === action.payload.id ? { ...x, quantity: x.quantity - 1 } : x
           )
-          .filter((item) => item.quantity > 0),
+          .filter((item) => item.quantity > 0), // Remove item if quantity is 0 or less
       };
     }
     case CartActionType.ClearCart: {
@@ -92,6 +92,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
+  // Memoize cartCount to prevent unnecessary re-calculations on every render.
   const cartCount = useMemo(() => {
     return state.items.reduce((acc, item) => acc + item.quantity, 0);
   }, [state.items]);

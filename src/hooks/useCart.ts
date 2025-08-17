@@ -1,7 +1,7 @@
-
 import { useContext } from 'react';
 import { CartContext, CartActionType } from '../context/CartContext';
 
+// Custom hook to access cart state and actions from the CartContext.
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
@@ -10,6 +10,7 @@ export const useCart = () => {
 
   const { state, dispatch, cartCount } = context;
 
+  // Returns the quantity of a specific item in the cart.
   const getQuantity = (id: number) => {
     const item = state.items.find((item) => item.id === id);
     return item ? item.quantity : 0;

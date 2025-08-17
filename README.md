@@ -1,12 +1,48 @@
-# React + Vite
+# My Shop - A Simple E-commerce Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple e-commerce frontend application built with React and Vite. It demonstrates basic product listing, shopping cart functionality, and a checkout process. The application uses `@tanstack/react-query` for data fetching, `react-router-dom` for routing, and Tailwind CSS for styling. Mock API calls are handled by `msw` (Mock Service Worker).
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Follow these instructions to set up and run the project locally.
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Node.js (v21 or higher recommended)
+- pnpm
+
+### Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository-url>
+    cd Shopping-Tech-Test
+    ```
+2.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `pnpm dev`
+
+Runs the app in development mode.
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+The page will reload when you make changes.
+You may also see any lint errors in the console.
+
+### `pnpm build`
+
+Builds the app for production to the `dist` folder.
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.
+Your app is ready to be deployed!
+
+### `pnpm lint`
+
+Runs ESLint to check for code quality issues.

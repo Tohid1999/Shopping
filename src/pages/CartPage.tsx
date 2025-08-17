@@ -11,11 +11,15 @@ const CartPage: React.FC = () => {
   const { state } = useCart();
   const { data: products, isLoading, error, refetch } = useProducts();
 
+  // Creates a memoized map of products for efficient lookup by ID.
+  // This avoids repeatedly searching the products array when calculating total cost or rendering cart items.
   const productMap = React.useMemo(() => {
     if (!products) return new Map<number, Product>();
     return new Map(products.map((p) => [p.id, p]));
   }, [products]);
 
+  // Calculates the total cost of items in the cart.
+  // useMemo ensures this calculation only re-runs when cart items or product data changes.
   const totalCost = React.useMemo(() => {
     return state.items.reduce((acc, item) => {
       const product = productMap.get(item.id);
@@ -23,14 +27,16 @@ const CartPage: React.FC = () => {
     }, 0);
   }, [state.items, productMap]);
 
+  // Helper function to render individual cart item rows.
   const renderCartItems = () => {
     return state.items.map((item) => {
       const product = productMap.get(item.id);
-      if (!product) return null;
+      if (!product) return null; // Should not happen if product data is consistent
       return <CartItemRow key={item.id} item={item} product={product} />;
     });
   };
 
+  // Determines the content to display in the cart based on whether it's empty or not.
   const cartContent = state.items.length === 0 ? (
     <>
       <p className="text-lg">Your cart is empty.</p>
@@ -60,6 +66,7 @@ const CartPage: React.FC = () => {
 
   return (
     <main className="container mx-auto mt-8 animate-fade-in-up">
+      {/* StatusWrapper handles loading, error, and refetching states for product data */}
       <StatusWrapper
         isLoading={isLoading}
         error={error}

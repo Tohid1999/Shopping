@@ -10,6 +10,7 @@ import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import { CartProvider } from './context/CartContext';
 
+// Conditionally enables API mocking in development environment using Mock Service Worker.
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
     return;

@@ -11,6 +11,7 @@ const CheckoutPage: React.FC = () => {
   const { data: products, isLoading, error, refetch } = useProducts();
   const navigate = useNavigate();
 
+  // Creates a memoized map of products for efficient lookup by ID.
   const productMap = React.useMemo(() => {
     if (!products) return new Map<number, Product>();
     return new Map(products.map((p) => [p.id, p]));
@@ -47,6 +48,7 @@ const CheckoutPage: React.FC = () => {
 
   return (
     <main className="container mx-auto mt-8 animate-fade-in-up">
+      {/* StatusWrapper handles loading, error, and refetching states for product data */}
       <StatusWrapper
         isLoading={isLoading}
         error={error}
