@@ -15,7 +15,7 @@ Follow these instructions to set up and run the project locally.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/Tohid1999/Shopping-abrnoc.git
     cd Shopping-Tech-Test
     ```
 2.  **Install dependencies:**
