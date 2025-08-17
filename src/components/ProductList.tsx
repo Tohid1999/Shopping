@@ -1,11 +1,17 @@
-import React from 'react';
-import { useProducts } from '../hooks/useProducts';
-import ProductCard from './ProductCard';
-import Skeleton from './Skeleton';
-import StatusWrapper from './StatusWrapper';
+import React from "react";
+import { useProducts } from "../hooks/useProducts";
+import ProductCard from "./ProductCard";
+import ProductSkeleton from "./ProductSkeleton";
+import StatusWrapper from "./StatusWrapper";
 
 const ProductList: React.FC = () => {
   const { data: products, isLoading, error, refetch } = useProducts();
+
+  const renderProductCards = () => {
+    return products?.map((product) => (
+      <ProductCard key={product.id} product={product} />
+    ));
+  };
 
   return (
     <StatusWrapper
@@ -17,18 +23,16 @@ const ProductList: React.FC = () => {
       loadingContent={
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {Array.from({ length: 3 }).map((_, i) => (
-            <Skeleton key={i} />
+            <ProductSkeleton key={i} />
           ))}
         </div>
       }
     >
       {/* Content to display when not loading and no error */}
-      <div>
+      <div className="px-4">
         <h2 className="text-2xl font-bold mb-4">Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {products?.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {renderProductCards()}
         </div>
       </div>
     </StatusWrapper>

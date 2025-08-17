@@ -1,5 +1,5 @@
-import React from 'react';
-import Skeleton from './Skeleton';
+import React from "react";
+import ProductSkeleton from "./ProductSkeleton";
 
 interface StatusWrapperProps {
   isLoading: boolean;
@@ -16,8 +16,8 @@ const StatusWrapper: React.FC<StatusWrapperProps> = ({
   error,
   refetch,
   children,
-  loadingMessage = 'Loading...',
-  errorMessage = 'Failed to load data',
+  loadingMessage = "Loading...",
+  errorMessage = "Failed to load data",
   loadingContent,
 }) => {
   if (isLoading) {
@@ -31,7 +31,9 @@ const StatusWrapper: React.FC<StatusWrapperProps> = ({
   if (error) {
     return (
       <div className="text-center py-10">
-        <p className="text-red-500 text-lg mb-4">{errorMessage}: {error.message}</p>
+        <p className="text-red-500 text-lg mb-4">
+          {errorMessage}: {error.message}
+        </p>
         <button
           onClick={() => refetch()}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"

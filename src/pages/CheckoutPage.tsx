@@ -29,6 +29,22 @@ const CheckoutPage: React.FC = () => {
     navigate("/");
   };
 
+  const renderOrderSummaryItems = () => {
+    return state.items.map((item) => {
+      const product = productMap.get(item.id);
+      if (!product) return null;
+      return (
+        <div key={item.id} className="flex justify-between">
+          <span>
+            {product.name} (Qty:{" "}
+            <span className="font-bold">{item.quantity}</span>)
+          </span>
+          <span>${(product.price * item.quantity).toFixed(2)}</span>
+        </div>
+      );
+    });
+  };
+
   return (
     <main className="container mx-auto mt-8 animate-fade-in-up">
       <StatusWrapper
@@ -42,19 +58,7 @@ const CheckoutPage: React.FC = () => {
           <h2 className="text-2xl font-bold mb-4">Checkout</h2>
           <div className="mb-4">
             <h3 className="text-xl font-semibold mb-2">Order Summary</h3>
-            {state.items.map((item) => {
-              const product = productMap.get(item.id);
-              if (!product) return null;
-              return (
-                <div key={item.id} className="flex justify-between">
-                  <span>
-                    {product.name} (Qty:{" "}
-                    <span className="font-bold">{item.quantity}</span>)
-                  </span>
-                  <span>${(product.price * item.quantity).toFixed(2)}</span>
-                </div>
-              );
-            })}
+            {renderOrderSummaryItems()}
             <hr className="my-2" />
             <div className="flex justify-between font-bold">
               <span>Total</span>

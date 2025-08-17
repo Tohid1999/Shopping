@@ -1,6 +1,6 @@
 import React from "react";
 
-const Skeleton: React.FC = () => {
+const ProductSkeleton: React.FC = () => {
   return (
     <div className="border border-gray-300 p-4 rounded-lg shadow animate-pulse">
       <div className="w-full h-48 bg-gray-300 mb-4"></div>
@@ -10,4 +10,4 @@ const Skeleton: React.FC = () => {
   );
 };
 
-export default Skeleton;
+export default ProductSkeleton;
